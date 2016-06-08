@@ -1,4 +1,4 @@
-# INDIGO-DataCLoud CDMI Java SPI
+# INDIGO-DataCloud CDMI Java SPI
 Java Service Provider Interface for CDMI storage back-ends
 
 ## Requirements
