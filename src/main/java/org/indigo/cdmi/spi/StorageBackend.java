@@ -18,25 +18,29 @@ public interface StorageBackend {
   /**
    * Provides the available capabilities of the back-end.
    * 
-   * @return the provided capabilities
+   * Comment: More specifically, these are the capabilities corresponding to some specific quality
+   * of service.
+   * 
+   * @return the provided capabilities as String-String key-value pairs. Non-string values e.g.
+   *         numeric or array have to be parsed from the String value.
    */
-  Map<String, Object> capabilities();
+  Map<String, String> capabilities();
 
   /**
-   * Starts a data object transition to the specified capabilities URI.
+   * Starts a CDMI object transition to the specified capabilities URI.
    * 
-   * @param path the path to the data object
+   * This operation
+   * 
+   * Comment: There should be the possiblity for this method to throw an exception; e.g., to
+   * indicate that the capabilitiesUri is not known/supported; the specific transition is not
+   * supported; the user is not authorised to make this transition, the path does not exist, ... The
+   * transition is performed by the implementing back-end
+   * 
+   * @param path the path to the data object or container as it can be queried via the CDMI
+   *        interface
    * @param capabilitiesUri the target capabilities URI
    */
-  void updateDataObject(String path, String capabilitiesUri);
-
-  /**
-   * Starts a container transition to the specified capabilities URI.
-   * 
-   * @param path the path to the data object
-   * @param capabilitiesUri the target capabilities URI
-   */
-  void updateContainerObject(String path, String capabilitiesUri);
+  void updateCdmiObject(String path, String capabilitiesUri) throws RuntimeException;
 
   /**
    * Gets the current transition status of the CDMI object.
@@ -47,9 +51,12 @@ public interface StorageBackend {
   TransitionStatus getCurrentStatus(String path);
 
   /**
-   * Gets the monitored attributes of the back-end, e.g. "cdmi_latency_provided".
+   * Gets the monitored attributes of the back-end, e.g. "cdmi_latency_provided", for the object
+   * specified by path.
    * 
-   * @return the monitored attributes of the back-end
+   * @param path the path of the data object or container
+   * @return the monitored attributes of the back-end as String-String key-value pairs. Non-string
+   *         values e.g. numeric or array have to be parsed from the String value.
    */
-  Map<String, Object> getMonitoringAttributes();
+  Map<String, String> getMonitoringAttributes();
 }

@@ -33,8 +33,8 @@ public class StorageBackendService {
   }
 
 
-  public Map<String, Object> getCapabilities() {
-    Map<String, Object> capabilities = null;
+  public Map<String, String> getCapabilities() {
+    Map<String, String> capabilities = null;
     try {
       Iterator<StorageBackend> storageBackends = loader.iterator();
       while (capabilities == null && storageBackends.hasNext()) {
