@@ -22,7 +22,7 @@ import static java.util.Objects.requireNonNull;
  * SPI.
  */
 public class ConfigurableStorageBackend extends WrappedStorageBackend {
-  private static StorageBackend createStorageBackend(String type, Map<String, String> properties) {
+  public static StorageBackend createStorageBackend(String type, Map<String, String> properties) {
     ServiceLoader<StorageBackendFactory> loader = ServiceLoader.load(StorageBackendFactory.class);
 
     for (StorageBackendFactory factory : loader) {

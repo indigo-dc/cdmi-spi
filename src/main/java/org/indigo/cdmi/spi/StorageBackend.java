@@ -10,7 +10,7 @@
 package org.indigo.cdmi.spi;
 
 import org.indigo.cdmi.BackEndException;
-import org.indigo.cdmi.Capability;
+import org.indigo.cdmi.BackendCapability;
 import org.indigo.cdmi.CdmiObjectStatus;
 
 import java.util.List;
@@ -23,9 +23,9 @@ public interface StorageBackend {
    * Comment: More specifically, these are the capabilities corresponding to some specific quality
    * of service.
    * 
-   * @return a {@link List} of the provided {@link Capability} capabilities
+   * @return a {@link List} of the provided {@link BackendCapability} capabilities
    */
-  List<Capability> getCapabilities();
+  List<BackendCapability> getCapabilities();
 
   /**
    * Starts a CDMI object transition to the specified capabilities URI.

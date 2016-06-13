@@ -26,7 +26,7 @@ public class WrappedStorageBackend implements StorageBackend {
   }
 
   @Override
-  public List<Capability> getCapabilities() {
+  public List<BackendCapability> getCapabilities() {
     return inner.getCapabilities();
   }
 
