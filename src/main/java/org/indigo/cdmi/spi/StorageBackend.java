@@ -9,9 +9,11 @@
 
 package org.indigo.cdmi.spi;
 
-import org.indigo.cdmi.TransitionStatus;
+import org.indigo.cdmi.BackEndException;
+import org.indigo.cdmi.Capability;
+import org.indigo.cdmi.CdmiObjectStatus;
 
-import java.util.Map;
+import java.util.List;
 
 public interface StorageBackend {
 
@@ -21,10 +23,9 @@ public interface StorageBackend {
    * Comment: More specifically, these are the capabilities corresponding to some specific quality
    * of service.
    * 
-   * @return the provided capabilities as String-String key-value pairs. Non-string values e.g.
-   *         numeric or array have to be parsed from the String value.
+   * @return a {@link List} of the provided {@link Capability} capabilities
    */
-  Map<String, String> capabilities();
+  List<Capability> getCapabilities();
 
   /**
    * Starts a CDMI object transition to the specified capabilities URI.
@@ -40,23 +41,14 @@ public interface StorageBackend {
    *        interface
    * @param capabilitiesUri the target capabilities URI
    */
-  void updateCdmiObject(String path, String capabilitiesUri) throws RuntimeException;
+  void updateCdmiObject(String path, String capabilitiesUri) throws BackEndException;
 
   /**
-   * Gets the current transition status of the CDMI object.
+   * Gets the current status of the CDMI object, including transition status and monitored
+   * attributes of the back-end, e.g. "cdmi_latency_provided", for the object specified by path.
    * 
    * @param path the path of the data object or container
-   * @return the {@link TransitionStatus}
+   * @return the {@link CdmiObjectStatus}
    */
-  TransitionStatus getCurrentStatus(String path);
-
-  /**
-   * Gets the monitored attributes of the back-end, e.g. "cdmi_latency_provided", for the object
-   * specified by path.
-   * 
-   * @param path the path of the data object or container
-   * @return the monitored attributes of the back-end as String-String key-value pairs. Non-string
-   *         values e.g. numeric or array have to be parsed from the String value.
-   */
-  Map<String, String> getMonitoringAttributes();
+  CdmiObjectStatus getCurrentStatus(String path);
 }
