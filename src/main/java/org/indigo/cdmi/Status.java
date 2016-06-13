@@ -10,5 +10,5 @@
 package org.indigo.cdmi;
 
 public enum Status {
-  OK, ERROR, TRANSITION
+  OK, TRANSITION
 }

@@ -9,35 +9,20 @@
 
 package org.indigo.cdmi;
 
-public class TransitionStatus {
+final public class TransitionStatus {
 
-  private Status status;
-  private String reason;
+  final private Status status;
 
-  public TransitionStatus(Status status, String reason) {
+  public TransitionStatus(Status status) {
     this.status = status;
-    this.reason = reason;
   }
 
   public Status getStatus() {
     return status;
   }
 
-  public void setStatus(Status status) {
-    this.status = status;
-  }
-
-  public String getReason() {
-    return reason;
-  }
-
-  public void setReason(String reason) {
-    this.reason = reason;
-  }
-
   @Override
   public String toString() {
-    return "TransitionStatus [" + (status != null ? "status=" + status + ", " : "")
-        + (reason != null ? "reason=" + reason : "") + "]";
+    return "TransitionStatus [" + (status != null ? "status=" + status : "") + "]";
   }
 }
