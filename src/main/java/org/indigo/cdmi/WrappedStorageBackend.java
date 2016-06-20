@@ -13,6 +13,8 @@ import static java.util.Objects.requireNonNull;
 
 import org.indigo.cdmi.spi.StorageBackend;
 
+import javax.security.auth.Subject;
+
 import java.util.List;
 
 /**
@@ -26,17 +28,17 @@ public class WrappedStorageBackend implements StorageBackend {
   }
 
   @Override
-  public List<BackendCapability> getCapabilities() {
-    return inner.getCapabilities();
+  public List<BackendCapability> getCapabilities(Subject id) {
+    return inner.getCapabilities(id);
   }
 
   @Override
-  public void updateCdmiObject(String path, String capabilitiesUri) throws BackEndException {
-    inner.updateCdmiObject(path, capabilitiesUri);
+  public void updateCdmiObject(Subject id, String path, String capabilitiesUri) throws BackEndException {
+    inner.updateCdmiObject(id, path, capabilitiesUri);
   }
 
   @Override
-  public CdmiObjectStatus getCurrentStatus(String path) {
-    return inner.getCurrentStatus(path);
+  public CdmiObjectStatus getCurrentStatus(Subject id, String path) {
+    return inner.getCurrentStatus(id, path);
   }
 }
