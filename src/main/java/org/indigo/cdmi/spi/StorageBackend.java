@@ -39,9 +39,11 @@ public interface StorageBackend {
    * 
    * @param path the path to the data object or container as it can be queried via the CDMI
    *        interface
-   * @param capabilitiesUri the target capabilities URI
+   * @param currentCapabilitiesUri the target capabilities URI
+   * @param targetCapabilitiesUri the target capabilities URI
    */
-  void updateCdmiObject(String path, String capabilitiesUri) throws BackEndException;
+  void updateCdmiObject(String path, String currentCapabilitiesUri, String targetCapabilitiesUri)
+      throws BackEndException;
 
   /**
    * Gets the current status of the CDMI object, including transition status and monitored
