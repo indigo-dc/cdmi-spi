@@ -26,7 +26,7 @@ public class WrappedStorageBackend implements StorageBackend {
   }
 
   @Override
-  public List<BackendCapability> getCapabilities() {
+  public List<BackendCapability> getCapabilities() throws BackEndException {
     return inner.getCapabilities();
   }
 
@@ -37,7 +37,7 @@ public class WrappedStorageBackend implements StorageBackend {
   }
 
   @Override
-  public CdmiObjectStatus getCurrentStatus(String path) {
+  public CdmiObjectStatus getCurrentStatus(String path) throws BackEndException {
     return inner.getCurrentStatus(path);
   }
 }

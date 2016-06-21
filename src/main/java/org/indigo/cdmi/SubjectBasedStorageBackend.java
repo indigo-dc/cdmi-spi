@@ -11,7 +11,6 @@ package org.indigo.cdmi;
 
 import org.indigo.cdmi.spi.StorageBackend;
 
-import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.List;
@@ -35,7 +34,7 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
 
   /**
    * Specify the subject for subsequent operations.
-   * 
+   *
    * @param subject the identity of the user.
    */
   public void setSubject(Subject subject) {
@@ -51,9 +50,13 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
   }
 
   @Override
-  public List<BackendCapability> getCapabilities() {
-    return Subject.doAs(subject,
-        (PrivilegedAction<List<BackendCapability>>) super::getCapabilities);
+  public List<BackendCapability> getCapabilities() throws BackEndException {
+    try {
+      return Subject.doAs(subject,
+        (PrivilegedExceptionAction<List<BackendCapability>>) super::getCapabilities);
+    } catch (PrivilegedActionException e) {
+      throw handleException(e);
+    }
   }
 
   @Override
@@ -65,26 +68,33 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
         return null;
       });
     } catch (PrivilegedActionException e) {
-      Throwable t = e.getCause();
-      if (t instanceof BackEndException) {
-        throw (BackEndException) t;
-      }
-      if (t instanceof RuntimeException) {
-        throw (RuntimeException) t;
-      }
-      if (t instanceof Error) {
-        throw (Error) t;
-      }
-      throw new RuntimeException("Received unexpected exception: " + t.toString(), t);
-    } catch (RuntimeException | Error e) {
-      throw e;
+      throw handleException(e);
     }
   }
 
   @Override
-  public CdmiObjectStatus getCurrentStatus(String path) {
-    return Subject.doAs(subject, (PrivilegedAction<CdmiObjectStatus>) () -> {
-      return super.getCurrentStatus(path);
-    });
+  public CdmiObjectStatus getCurrentStatus(String path) throws BackEndException {
+    try {
+      return Subject.doAs(subject, (PrivilegedExceptionAction<CdmiObjectStatus>) () -> {
+        return super.getCurrentStatus(path);
+      });
+    } catch (PrivilegedActionException e) {
+      throw handleException(e);
+    }
+  }
+
+  private RuntimeException handleException(PrivilegedActionException e)
+      throws BackEndException {
+    Throwable t = e.getCause();
+    if (t instanceof BackEndException) {
+      throw (BackEndException) t;
+    }
+    if (t instanceof RuntimeException) {
+      throw (RuntimeException) t;
+    }
+    if (t instanceof Error) {
+      throw (Error) t;
+    }
+    return new RuntimeException("Received unexpected exception: " + t, t);
   }
 }
