@@ -14,18 +14,24 @@ import java.util.Map;
 final public class CdmiObjectStatus {
 
   final private Status status;
+  final private String currentCapabilitiesUri;
   final private String targetCapabilitiesUri;
   final private Map<String, String> monitoredAttributes;
 
   public CdmiObjectStatus(Status status, Map<String, String> monitoredAttributes,
-      String targetCapabilitiesUri) {
+      String currentCapabilitiesUri, String targetCapabilitiesUri) {
     this.status = status;
     this.monitoredAttributes = monitoredAttributes;
+    this.currentCapabilitiesUri = currentCapabilitiesUri;
     this.targetCapabilitiesUri = targetCapabilitiesUri;
   }
 
   public Status getStatus() {
     return status;
+  }
+
+  public String getCurrentCapabilitiesUri() {
+    return currentCapabilitiesUri;
   }
 
   public String getTargetCapabilitiesUri() {
@@ -39,6 +45,8 @@ final public class CdmiObjectStatus {
   @Override
   public String toString() {
     return "CdmiObjectStatus [" + (status != null ? "status=" + status + ", " : "")
+        + (currentCapabilitiesUri != null
+            ? "currentCapabilitiesUri=" + currentCapabilitiesUri + ", " : "")
         + (targetCapabilitiesUri != null ? "targetCapabilitiesUri=" + targetCapabilitiesUri + ", "
             : "")
         + (monitoredAttributes != null ? "monitoredAttributes=" + monitoredAttributes : "") + "]";
