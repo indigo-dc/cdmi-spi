@@ -28,6 +28,14 @@ final public class CdmiObjectStatus {
     return status;
   }
 
+  public String getTargetCapabilitiesUri() {
+    return targetCapabilitiesUri;
+  }
+
+  public Map<String, String> getMonitoredAttributes() {
+    return monitoredAttributes;
+  }
+
   @Override
   public String toString() {
     return "CdmiObjectStatus [" + (status != null ? "status=" + status + ", " : "")
