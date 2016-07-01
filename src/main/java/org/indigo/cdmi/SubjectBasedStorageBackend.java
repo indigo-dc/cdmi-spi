@@ -25,6 +25,7 @@ import javax.security.auth.Subject;
  * This class is not thread safe, in particular, the caller is responsible for ensuring a
  * happens-before relationship between {@code #setSubject} and any subsequent call to a
  * StorageBackend method.
+ * </p>
  */
 public class SubjectBasedStorageBackend extends WrappedStorageBackend {
   private Subject subject;
@@ -52,30 +53,34 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
 
   @Override
   public List<BackendCapability> getCapabilities() {
-    return Subject.doAs(subject,
-        (PrivilegedAction<List<BackendCapability>>) super::getCapabilities);
+    return Subject.doAs(subject, (PrivilegedAction<List<BackendCapability>>) () -> {
+      try {
+        return super.getCapabilities();
+      } catch (BackEndException e) {
+        return null;
+      }
+    });
   }
 
   @Override
-  public void updateCdmiObject(String path, String currentCapabilitiesUri,
-      String targetCapabilitiesUri) throws BackEndException {
+  public void updateCdmiObject(String path, String targetCapabilitiesUri) throws BackEndException {
     try {
       Subject.doAs(subject, (PrivilegedExceptionAction<Void>) () -> {
-        super.updateCdmiObject(path, currentCapabilitiesUri, targetCapabilitiesUri);
+        super.updateCdmiObject(path, targetCapabilitiesUri);
         return null;
       });
-    } catch (PrivilegedActionException e) {
-      Throwable t = e.getCause();
-      if (t instanceof BackEndException) {
-        throw (BackEndException) t;
+    } catch (PrivilegedActionException ex) {
+      Throwable th = ex.getCause();
+      if (th instanceof BackEndException) {
+        throw (BackEndException) th;
       }
-      if (t instanceof RuntimeException) {
-        throw (RuntimeException) t;
+      if (th instanceof RuntimeException) {
+        throw (RuntimeException) th;
       }
-      if (t instanceof Error) {
-        throw (Error) t;
+      if (th instanceof Error) {
+        throw (Error) th;
       }
-      throw new RuntimeException("Received unexpected exception: " + t.toString(), t);
+      throw new RuntimeException("Received unexpected exception: " + th.toString(), th);
     } catch (RuntimeException | Error e) {
       throw e;
     }
@@ -84,7 +89,11 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
   @Override
   public CdmiObjectStatus getCurrentStatus(String path) {
     return Subject.doAs(subject, (PrivilegedAction<CdmiObjectStatus>) () -> {
-      return super.getCurrentStatus(path);
+      try {
+        return super.getCurrentStatus(path);
+      } catch (BackEndException e) {
+        return null;
+      }
     });
   }
 }

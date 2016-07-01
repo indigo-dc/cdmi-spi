@@ -9,10 +9,15 @@
 
 package org.indigo.cdmi;
 
+/**
+ * Representation of a back-end exception. If the back-end can not perform the requested operation
+ * or has other errors, this exception should be thrown.
+ *
+ */
 public class BackEndException extends Exception {
 
   /**
-   * 
+   * Serial version uid.
    */
   private static final long serialVersionUID = 7571457631290115062L;
 

@@ -20,6 +20,7 @@ import java.util.Map;
  * {@literal META-INF/services/org.indigo.cdmi.spi.StorageBackendFactory} within their jar file.
  * This file must provide a simple list the fully qualified class name of the classes that implement
  * StorageBackendFactory; e.g.,
+ * </p>
  * 
  * <pre>
  * org.example.cdmi.FooStorageFactory
