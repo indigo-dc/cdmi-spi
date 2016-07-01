@@ -9,25 +9,32 @@
 
 package org.indigo.cdmi;
 
+import static java.util.Objects.requireNonNull;
+
 import org.indigo.cdmi.spi.StorageBackend;
 import org.indigo.cdmi.spi.StorageBackendFactory;
 
 import java.util.Map;
 import java.util.ServiceLoader;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * A StorageBackend that wraps acts as a proxy to some other StorageBackend that is discovered via
  * SPI.
  */
 public class ConfigurableStorageBackend extends WrappedStorageBackend {
+  /**
+   * Produces a new storage back-end specified by the given type with given properties.
+   * 
+   * @param type the type of the storage back-end to produce, can not be null
+   * @param properties the properties for the back-end to produce, can not be null
+   * @return a {@link StorageBackend} specified by the given type
+   */
   public static StorageBackend createStorageBackend(String type, Map<String, String> properties) {
     ServiceLoader<StorageBackendFactory> loader = ServiceLoader.load(StorageBackendFactory.class);
 
     for (StorageBackendFactory factory : loader) {
       if (factory.getType().equals(type)) {
-        return factory.createStorageBackend(properties);
+        return factory.createStorageBackend(requireNonNull(properties));
       }
     }
 

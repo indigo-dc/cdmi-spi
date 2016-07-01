@@ -19,31 +19,31 @@ public interface StorageBackend {
 
   /**
    * Provides the available capabilities of the back-end.
-   * 
+   * <p>
    * Comment: More specifically, these are the capabilities corresponding to some specific quality
    * of service.
+   * </p>
    * 
    * @return a {@link List} of the provided {@link BackendCapability} capabilities
+   * @throws BackEndException in case the operation could not be performed on the back-end
    */
-  List<BackendCapability> getCapabilities();
+  List<BackendCapability> getCapabilities() throws BackEndException;
 
   /**
    * Starts a CDMI object transition to the specified capabilities URI.
-   * 
-   * This operation
-   * 
+   * <p>
    * Comment: There should be the possiblity for this method to throw an exception; e.g., to
    * indicate that the capabilitiesUri is not known/supported; the specific transition is not
    * supported; the user is not authorised to make this transition, the path does not exist, ... The
    * transition is performed by the implementing back-end
+   * </p>
    * 
    * @param path the path to the data object or container as it can be queried via the CDMI
    *        interface
-   * @param currentCapabilitiesUri the target capabilities URI
    * @param targetCapabilitiesUri the target capabilities URI
+   * @throws BackEndException in case the operation could not be performed on the back-end
    */
-  void updateCdmiObject(String path, String currentCapabilitiesUri, String targetCapabilitiesUri)
-      throws BackEndException;
+  void updateCdmiObject(String path, String targetCapabilitiesUri) throws BackEndException;
 
   /**
    * Gets the current status of the CDMI object, including transition status and monitored
@@ -51,6 +51,7 @@ public interface StorageBackend {
    * 
    * @param path the path of the data object or container
    * @return the {@link CdmiObjectStatus}
+   * @throws BackEndException in case the operation could not be performed on the back-end
    */
-  CdmiObjectStatus getCurrentStatus(String path);
+  CdmiObjectStatus getCurrentStatus(String path) throws BackEndException;
 }

@@ -11,13 +11,29 @@ package org.indigo.cdmi;
 
 import java.util.Map;
 
-final public class CdmiObjectStatus {
+/**
+ * Immutable representation of the status of a CDMI object.
+ *
+ */
+public final class CdmiObjectStatus {
 
-  final private Status status;
-  final private String currentCapabilitiesUri;
-  final private String targetCapabilitiesUri;
-  final private Map<String, String> monitoredAttributes;
+  private final Status status;
+  private final String currentCapabilitiesUri;
+  private final String targetCapabilitiesUri;
+  private final Map<String, String> monitoredAttributes;
 
+  /**
+   * Creates a new {@link CdmiObjectStatus}.
+   * 
+   * @param status the {@link Status} of this object, indicating if this object is in transition or
+   *        not
+   * @param monitoredAttributes a {@link Map} with the monitored attributes for this object, e.g.
+   *        "cdmi_latency_provided", "100"
+   * @param currentCapabilitiesUri the current capabilitiesUri (reference to set of QoS attributes)
+   * @param targetCapabilitiesUri the target capabilitiesUri (reference to set of QoS attributes),
+   *        if a transition from the current capabilitiesUri to the target capabilitiesUri has been
+   *        requested
+   */
   public CdmiObjectStatus(Status status, Map<String, String> monitoredAttributes,
       String currentCapabilitiesUri, String targetCapabilitiesUri) {
     this.status = status;
@@ -26,18 +42,41 @@ final public class CdmiObjectStatus {
     this.targetCapabilitiesUri = targetCapabilitiesUri;
   }
 
+  /**
+   * Gets the current {@link Status} of this object, indicating if this object is in transition or
+   * not.
+   *
+   * @return the current {@link Status} of this object
+   */
   public Status getStatus() {
     return status;
   }
 
+  /**
+   * Gets the current capablitiesUri (reference to set of QoS attributes) for this object.
+   * 
+   * @return the current capabilitiesUri
+   */
   public String getCurrentCapabilitiesUri() {
     return currentCapabilitiesUri;
   }
 
+  /**
+   * Gets the target capablitiesUri (reference to set of QoS attributes) for this object.
+   * 
+   * @return the target capabilitiesUri, if a transition from the current capabilitiesUri to the
+   *         target capabilitiesUri has been requested, else null
+   */
   public String getTargetCapabilitiesUri() {
     return targetCapabilitiesUri;
   }
 
+  /**
+   * Gets the monitored attributes of this object, e.g. "cdmi_latency_provided", "100".
+   * 
+   * @return a {@link Map} of monitored attribute for this object, e.g. the current provided latency
+   *         as key-value pairs ("cdmi_latency_provided", "100")
+   */
   public Map<String, String> getMonitoredAttributes() {
     return monitoredAttributes;
   }

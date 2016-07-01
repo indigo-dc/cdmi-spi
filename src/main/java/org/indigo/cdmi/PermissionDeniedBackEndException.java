@@ -6,15 +6,15 @@
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  */
+
 package org.indigo.cdmi;
 
 /**
- * This exception indicates that a user made a requested for which that user is
- * not authorised.  That user reissuing the request will (very likely) yield the
- * same result.  A different user issuing this request may succeed.
+ * This exception indicates that a user made a requested for which that user is not authorised. That
+ * user reissuing the request will (very likely) yield the same result. A different user issuing
+ * this request may succeed.
  */
-public class PermissionDeniedBackEndException extends BackEndException
-{
+public class PermissionDeniedBackEndException extends BackEndException {
   private static final long serialVersionUID = 1L;
 
   public PermissionDeniedBackEndException() {

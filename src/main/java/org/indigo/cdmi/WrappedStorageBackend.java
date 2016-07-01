@@ -26,18 +26,17 @@ public class WrappedStorageBackend implements StorageBackend {
   }
 
   @Override
-  public List<BackendCapability> getCapabilities() {
+  public List<BackendCapability> getCapabilities() throws BackEndException {
     return inner.getCapabilities();
   }
 
   @Override
-  public void updateCdmiObject(String path, String currentCapabilitiesUri,
-      String targetCapabilitiesUri) throws BackEndException {
-    inner.updateCdmiObject(path, currentCapabilitiesUri, targetCapabilitiesUri);
+  public void updateCdmiObject(String path, String targetCapabilitiesUri) throws BackEndException {
+    inner.updateCdmiObject(path, targetCapabilitiesUri);
   }
 
   @Override
-  public CdmiObjectStatus getCurrentStatus(String path) {
+  public CdmiObjectStatus getCurrentStatus(String path) throws BackEndException {
     return inner.getCurrentStatus(path);
   }
 }

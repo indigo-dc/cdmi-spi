@@ -6,15 +6,15 @@
  *
  * http://www.apache.org/licenses/LICENSE-2.0
  */
+
 package org.indigo.cdmi;
 
 /**
- * Indicates that the supplied request cannot be satisfied with the supplied
- * arguments.  Repeating the same request is (very unlikely) to succeed.
- * Subsequent requests may succeed if the arguments are modified.
+ * Indicates that the supplied request cannot be satisfied with the supplied arguments. Repeating
+ * the same request is (very unlikely) to succeed. Subsequent requests may succeed if the arguments
+ * are modified.
  */
-public class InvalidArgumentBackEndException extends BackEndException
-{
+public class InvalidArgumentBackEndException extends BackEndException {
   private static final long serialVersionUID = 1L;
 
   public InvalidArgumentBackEndException() {

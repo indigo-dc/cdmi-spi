@@ -9,6 +9,10 @@
 
 package org.indigo.cdmi;
 
+/**
+ * Representation of the status.
+ *
+ */
 public enum Status {
   OK, TRANSITION
 }
