@@ -11,7 +11,6 @@ package org.indigo.cdmi;
 
 import org.indigo.cdmi.spi.StorageBackend;
 
-import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.List;
@@ -52,14 +51,25 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
   }
 
   @Override
-  public List<BackendCapability> getCapabilities() {
-    return Subject.doAs(subject, (PrivilegedAction<List<BackendCapability>>) () -> {
-      try {
-        return super.getCapabilities();
-      } catch (BackEndException e) {
-        return null;
+  public List<BackendCapability> getCapabilities() throws BackEndException {
+    try {
+      return Subject.doAs(subject,
+          (PrivilegedExceptionAction<List<BackendCapability>>) super::getCapabilities);
+    } catch (PrivilegedActionException ex) {
+      Throwable th = ex.getCause();
+      if (th instanceof BackEndException) {
+        throw (BackEndException) th;
       }
-    });
+      if (th instanceof RuntimeException) {
+        throw (RuntimeException) th;
+      }
+      if (th instanceof Error) {
+        throw (Error) th;
+      }
+      throw new RuntimeException("Received unexpected exception: " + th.toString(), th);
+    } catch (RuntimeException | Error e) {
+      throw e;
+    }
   }
 
   @Override
@@ -87,13 +97,25 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
   }
 
   @Override
-  public CdmiObjectStatus getCurrentStatus(String path) {
-    return Subject.doAs(subject, (PrivilegedAction<CdmiObjectStatus>) () -> {
-      try {
+  public CdmiObjectStatus getCurrentStatus(String path) throws BackEndException {
+    try {
+      return Subject.doAs(subject, (PrivilegedExceptionAction<CdmiObjectStatus>) () -> {
         return super.getCurrentStatus(path);
-      } catch (BackEndException e) {
-        return null;
+      });
+    } catch (PrivilegedActionException ex) {
+      Throwable th = ex.getCause();
+      if (th instanceof BackEndException) {
+        throw (BackEndException) th;
       }
-    });
+      if (th instanceof RuntimeException) {
+        throw (RuntimeException) th;
+      }
+      if (th instanceof Error) {
+        throw (Error) th;
+      }
+      throw new RuntimeException("Received unexpected exception: " + th.toString(), th);
+    } catch (RuntimeException | Error e) {
+      throw e;
+    }
   }
 }
