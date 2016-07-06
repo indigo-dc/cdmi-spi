@@ -17,7 +17,6 @@ import java.util.Map;
  */
 public final class CdmiObjectStatus {
 
-  private final Status status;
   private final String currentCapabilitiesUri;
   private final String targetCapabilitiesUri;
   private final Map<String, String> monitoredAttributes;
@@ -25,31 +24,18 @@ public final class CdmiObjectStatus {
   /**
    * Creates a new {@link CdmiObjectStatus}.
    * 
-   * @param status the {@link Status} of this object, indicating if this object is in transition or
-   *        not
    * @param monitoredAttributes a {@link Map} with the monitored attributes for this object, e.g.
    *        "cdmi_latency_provided", "100"
    * @param currentCapabilitiesUri the current capabilitiesUri (reference to set of QoS attributes)
    * @param targetCapabilitiesUri the target capabilitiesUri (reference to set of QoS attributes),
    *        if a transition from the current capabilitiesUri to the target capabilitiesUri has been
-   *        requested
+   *        requested if no transition has been requested the value should be null.
    */
-  public CdmiObjectStatus(Status status, Map<String, String> monitoredAttributes,
-      String currentCapabilitiesUri, String targetCapabilitiesUri) {
-    this.status = status;
+  public CdmiObjectStatus(Map<String, String> monitoredAttributes, String currentCapabilitiesUri,
+      String targetCapabilitiesUri) {
     this.monitoredAttributes = monitoredAttributes;
     this.currentCapabilitiesUri = currentCapabilitiesUri;
     this.targetCapabilitiesUri = targetCapabilitiesUri;
-  }
-
-  /**
-   * Gets the current {@link Status} of this object, indicating if this object is in transition or
-   * not.
-   *
-   * @return the current {@link Status} of this object
-   */
-  public Status getStatus() {
-    return status;
   }
 
   /**
@@ -83,7 +69,7 @@ public final class CdmiObjectStatus {
 
   @Override
   public String toString() {
-    return "CdmiObjectStatus [" + (status != null ? "status=" + status + ", " : "")
+    return "CdmiObjectStatus ["
         + (currentCapabilitiesUri != null
             ? "currentCapabilitiesUri=" + currentCapabilitiesUri + ", " : "")
         + (targetCapabilitiesUri != null ? "targetCapabilitiesUri=" + targetCapabilitiesUri + ", "
