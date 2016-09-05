@@ -67,8 +67,8 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
         throw (Error) th;
       }
       throw new RuntimeException("Received unexpected exception: " + th.toString(), th);
-    } catch (RuntimeException | Error e) {
-      throw e;
+    } catch (RuntimeException | Error ex) {
+      throw ex;
     }
   }
 
@@ -91,8 +91,8 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
         throw (Error) th;
       }
       throw new RuntimeException("Received unexpected exception: " + th.toString(), th);
-    } catch (RuntimeException | Error e) {
-      throw e;
+    } catch (RuntimeException | Error ex) {
+      throw ex;
     }
   }
 
@@ -114,8 +114,8 @@ public class SubjectBasedStorageBackend extends WrappedStorageBackend {
         throw (Error) th;
       }
       throw new RuntimeException("Received unexpected exception: " + th.toString(), th);
-    } catch (RuntimeException | Error e) {
-      throw e;
+    } catch (RuntimeException | Error ex) {
+      throw ex;
     }
   }
 }

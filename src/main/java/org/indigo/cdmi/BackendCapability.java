@@ -23,9 +23,8 @@ public class BackendCapability {
   private String name;
   private CapabilityType type;
 
-  private Map<String, String> capabilities;
-  private Map<String, String> metadata;
-
+  private Map<String, Object> capabilities;
+  private Map<String, Object> metadata;
 
   /**
    * Creates a new {@link BackendCapability} object.
@@ -82,7 +81,7 @@ public class BackendCapability {
    * 
    * @return a {@link Map} with the provided capabilities
    */
-  public Map<String, String> getCapabilities() {
+  public Map<String, Object> getCapabilities() {
     return capabilities;
   }
 
@@ -92,7 +91,7 @@ public class BackendCapability {
    * 
    * @param capabilities a {@link Map} with the provided capabilities
    */
-  public void setCapabilities(Map<String, String> capabilities) {
+  public void setCapabilities(Map<String, Object> capabilities) {
     this.capabilities = capabilities;
   }
 
@@ -102,7 +101,7 @@ public class BackendCapability {
    * 
    * @return a {@link Map} with the objects QoS meta-data
    */
-  public Map<String, String> getMetadata() {
+  public Map<String, Object> getMetadata() {
     return metadata;
   }
 
@@ -111,7 +110,7 @@ public class BackendCapability {
    * 
    * @param metadata a {@link Map} with the objects QoS meta-data
    */
-  public void setMetadata(Map<String, String> metadata) {
+  public void setMetadata(Map<String, Object> metadata) {
     this.metadata = metadata;
   }
 
