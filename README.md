@@ -1,6 +1,35 @@
 # INDIGO-DataCloud CDMI Java SPI
 Java Service Provider Interface for CDMI storage back-ends
 
+## Maven
+### Latest Release (Stable)
+v0.2
+
+**Using cdmi-spi from KIT SCC repository**
+```xml
+<repositories>
+	<repository>
+		<releases>
+		  <enabled>true</enabled>
+		  <updatePolicy>always</updatePolicy>
+		  <checksumPolicy>fail</checksumPolicy>
+		</releases>
+		<id>SCC-KIT</id>
+		<name>SCC</name>
+		<url>http://cdmi-qos.data.kit.edu/maven/</url>
+	  <layout>default</layout>
+  </repository>
+</repositories>
+```
+
+```xml
+<dependency>
+	<groupId>edu.kit.scc</groupId>
+	<artifactId>cdmi-spi</artifactId>
+	<version>0.2</version>
+</dependency>
+```
+
 ## Requirements
 
 * JDK 1.8+
