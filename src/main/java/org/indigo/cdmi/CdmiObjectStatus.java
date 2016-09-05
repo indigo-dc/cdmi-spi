@@ -19,7 +19,7 @@ public final class CdmiObjectStatus {
 
   private final String currentCapabilitiesUri;
   private final String targetCapabilitiesUri;
-  private final Map<String, String> monitoredAttributes;
+  private final Map<String, Object> monitoredAttributes;
 
   /**
    * Creates a new {@link CdmiObjectStatus}.
@@ -31,7 +31,7 @@ public final class CdmiObjectStatus {
    *        if a transition from the current capabilitiesUri to the target capabilitiesUri has been
    *        requested if no transition has been requested the value should be null.
    */
-  public CdmiObjectStatus(Map<String, String> monitoredAttributes, String currentCapabilitiesUri,
+  public CdmiObjectStatus(Map<String, Object> monitoredAttributes, String currentCapabilitiesUri,
       String targetCapabilitiesUri) {
     this.monitoredAttributes = monitoredAttributes;
     this.currentCapabilitiesUri = currentCapabilitiesUri;
@@ -63,7 +63,7 @@ public final class CdmiObjectStatus {
    * @return a {@link Map} of monitored attribute for this object, e.g. the current provided latency
    *         as key-value pairs ("cdmi_latency_provided", "100")
    */
-  public Map<String, String> getMonitoredAttributes() {
+  public Map<String, Object> getMonitoredAttributes() {
     return monitoredAttributes;
   }
 
