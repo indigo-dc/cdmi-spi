@@ -20,6 +20,7 @@ public final class CdmiObjectStatus {
   private final String currentCapabilitiesUri;
   private final String targetCapabilitiesUri;
   private final Map<String, Object> monitoredAttributes;
+  private Map<String, Object> exportAttributes;
 
   /**
    * Creates a new {@link CdmiObjectStatus}.
@@ -36,6 +37,24 @@ public final class CdmiObjectStatus {
     this.monitoredAttributes = monitoredAttributes;
     this.currentCapabilitiesUri = currentCapabilitiesUri;
     this.targetCapabilitiesUri = targetCapabilitiesUri;
+  }
+
+  /**
+   * Gets the attributes for alternative protocols exported via CDMI.
+   *
+   * @return the exportAttributes
+   */
+  public Map<String, Object> getExportAttributes() {
+    return exportAttributes;
+  }
+
+  /**
+   * Gets the attributes for alternative protocols exported via CDMI.
+   *
+   * @param exportAttributes the exportAttributes to set
+   */
+  public void setExportAttributes(Map<String, Object> exportAttributes) {
+    this.exportAttributes = exportAttributes;
   }
 
   /**
@@ -67,6 +86,11 @@ public final class CdmiObjectStatus {
     return monitoredAttributes;
   }
 
+  /*
+   * (non-Javadoc)
+   *
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "CdmiObjectStatus ["
@@ -74,6 +98,7 @@ public final class CdmiObjectStatus {
             ? "currentCapabilitiesUri=" + currentCapabilitiesUri + ", " : "")
         + (targetCapabilitiesUri != null ? "targetCapabilitiesUri=" + targetCapabilitiesUri + ", "
             : "")
-        + (monitoredAttributes != null ? "monitoredAttributes=" + monitoredAttributes : "") + "]";
+        + (monitoredAttributes != null ? "monitoredAttributes=" + monitoredAttributes + ", " : "")
+        + (exportAttributes != null ? "exportAttributes=" + exportAttributes : "") + "]";
   }
 }

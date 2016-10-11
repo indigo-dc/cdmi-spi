@@ -3,7 +3,12 @@ Java Service Provider Interface for CDMI storage back-ends
 
 ## Maven
 ### Latest Release (Stable)
-v0.2
+v0.3
+
+### Release notes v0.3
+- added structure to CdmiObjectStatus to hold CDMI export attributes
+
+### Usage
 
 **Using cdmi-spi from KIT SCC repository**
 ```xml
