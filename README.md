@@ -31,7 +31,7 @@ v0.3
 <dependency>
 	<groupId>edu.kit.scc</groupId>
 	<artifactId>cdmi-spi</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 </dependency>
 ```
 
