@@ -9,6 +9,7 @@
 
 package org.indigo.cdmi;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,6 +22,7 @@ public final class CdmiObjectStatus {
   private final String targetCapabilitiesUri;
   private final Map<String, Object> monitoredAttributes;
   private Map<String, Object> exportAttributes;
+  private List<String> children;
 
   /**
    * Creates a new {@link CdmiObjectStatus}.
@@ -37,6 +39,24 @@ public final class CdmiObjectStatus {
     this.monitoredAttributes = monitoredAttributes;
     this.currentCapabilitiesUri = currentCapabilitiesUri;
     this.targetCapabilitiesUri = targetCapabilitiesUri;
+  }
+
+  /**
+   * Gets the children for a CDMI object.
+   *
+   * @return the children
+   */
+  public List<String> getChildren() {
+    return children;
+  }
+
+  /**
+   * Gets the children for a CDMI object.
+   *
+   * @param children the children to set
+   */
+  public void setChildren(List<String> children) {
+    this.children = children;
   }
 
   /**

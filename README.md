@@ -3,7 +3,10 @@ Java Service Provider Interface for CDMI storage back-ends
 
 ## Maven
 ### Latest Release (Stable)
-v0.3
+v0.4
+
+### Release notes v0.4
+- added structure to CdmiObjectStatus to hold CDMI children arrays
 
 ### Release notes v0.3
 - added structure to CdmiObjectStatus to hold CDMI export attributes
@@ -31,7 +34,7 @@ v0.3
 <dependency>
 	<groupId>edu.kit.scc</groupId>
 	<artifactId>cdmi-spi</artifactId>
-	<version>0.3</version>
+	<version>0.4</version>
 </dependency>
 ```
 
